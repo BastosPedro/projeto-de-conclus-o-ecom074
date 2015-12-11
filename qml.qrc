@@ -3,5 +3,9 @@
         <file>main.qml</file>
         <file>assets/giraffe_gold.png</file>
         <file>MyButton.qml</file>
+        <file>assets/close_gold.png</file>
+        <file>assets/help_gold.png</file>
+        <file>assets/leader_gold.png</file>
+        <file>assets/play_gold.png</file>
     </qresource>
 </RCC>
