@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>assets/giraffe_gold.png</file>
+        <file>MyButton.qml</file>
     </qresource>
 </RCC>
-
