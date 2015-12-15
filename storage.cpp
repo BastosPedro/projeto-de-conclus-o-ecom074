@@ -1,34 +1,17 @@
 #include "storage.hpp"
 #include <iostream>
 
-storage::storage()
-{
-    qsrand(time(0));
-    //setBoth(qrand() % 10, qrand() % 10);
-    setNumX(qrand() % 10);
-    setNumY(qrand() % 10);
-    qDebug() << "numberX" << m_numX << endl
-             << "numberY" << m_numY;
-    int input;
-    std::cin >> input;
-    qDebug() << "input" << input;
-    qDebug() << (compare(input, m_numX, m_numY));
-}
-
-int storage::getPlayerInput() const
-{
-    return playerInput;
-}
-
-void storage::setPlayerInput(int value)
-{
-    playerInput = value;
-}
+storage::storage() {}
 
 bool storage::compare(int anyInput, int numA, int numB)
 {
     if(anyInput == (numA + numB)) return true;
     else return false;
+}
+
+int storage::input() const
+{
+    return m_input;
 }
 
 //signals and slots
@@ -44,19 +27,32 @@ int storage::numY() const
 
 void storage::setNumX(int numX)
 {
-    if (m_numX == numX)
+    /*if (m_numX == numX)
         return;
 
+    m_numX = numX;*/
+    qsrand(time(0));
+    numX = qrand() % (count+10) + count;
     m_numX = numX;
     emit numXChanged(numX);
 }
 
 void storage::setNumY(int numY)
 {
-    if (m_numY == numY)
-        return;
-
+    /*if (m_numY == numY)
+        return;*/
+    qsrand(time(0));
+    numY = qrand() % (count+10) + count;
     m_numY = numY;
     emit numYChanged(numY);
+}
+
+void storage::setInput(int input)
+{
+    if (m_input == input)
+        return;
+
+    m_input = input;
+    emit inputChanged(input);
 }
 

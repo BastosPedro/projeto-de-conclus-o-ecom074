@@ -9,30 +9,28 @@ class storage : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(int numX READ numX WRITE setNumX NOTIFY numXChanged)
     Q_PROPERTY(int numY READ numY WRITE setNumY NOTIFY numYChanged)
-private:
-    //int numX, numY;
-    int playerScore, playerInput;
-    int count;
-    int m_numX;
-    int m_numY;
+    Q_PROPERTY(int input READ input WRITE setInput NOTIFY inputChanged)
 
 public:
     storage();
-
     int numX() const;
     int numY() const;
-    int getPlayerInput() const;
-    void setPlayerInput(int value);
-
+    int input() const;
     bool compare(int anyInput, int numA, int numB);
 
 signals:
     void numXChanged(int numX);
     void numYChanged(int numY);
+    void inputChanged(int input);
 
 public slots:
     void setNumX(int numX);
     void setNumY(int numY);
+    void setInput(int input);
+
+private:
+    int playerScore, count = 0;
+    int m_numX, m_numY, m_input;
 };
 
 #endif // STORAGE_HPP

@@ -6,5 +6,7 @@
         <file>assets/help_gold.png</file>
         <file>assets/leader_gold.png</file>
         <file>assets/play_gold.png</file>
+        <file>MainScreen.qml</file>
+        <file>assets/arrow_gold.png</file>
     </qresource>
 </RCC>
