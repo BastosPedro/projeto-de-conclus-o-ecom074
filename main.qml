@@ -3,8 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
-//import "MyButton.qml"
-
+//import "HelpPage.qml"
 
 Window {
     function mm(value){
@@ -60,7 +59,9 @@ Window {
                 }
 
                 ColumnLayout{
+                    id: options
                     anchors.centerIn:parent
+                    visible: true
                     Text{
                         id:title
                         text: "Math Master"
