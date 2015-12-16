@@ -11,6 +11,11 @@ bool storage::compare(int anyInput, int numA, int numB)
     else return false;
 }
 
+int storage::score() const
+{
+    return m_score;
+}
+
 int storage::input() const
 {
     return m_input;
@@ -29,14 +34,14 @@ int storage::numY() const
 
 void storage::setNumX(int numX)
 {
-    numX = qrand() % (count+10) + count;
+    numX =  qrand() % 11 + (m_score*10);
     m_numX = numX;
     emit numXChanged(numX);
 }
 
 void storage::setNumY(int numY)
 {
-    numY = qrand() % (count+10) + count;
+    numY = qrand() % 11 + (m_score*10);
     m_numY = numY;
     emit numYChanged(numY);
 }
@@ -48,5 +53,14 @@ void storage::setInput(int input)
 
     m_input = input;
     emit inputChanged(input);
+}
+
+void storage::setScore(int score)
+{
+    if (m_score == score)
+        return;
+
+    m_score = score;
+    emit scoreChanged(score);
 }
 
