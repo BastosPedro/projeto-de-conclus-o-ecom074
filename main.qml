@@ -85,6 +85,8 @@ Window {
                         hoverEnabled: true
                         onClicked: {
                             mainScreen.visible = true
+                            helpScreen.visible = false
+                            playScreen.visible = false
                             backButton.visible = false
                         }
                     }
@@ -92,6 +94,12 @@ Window {
 
                 MainScreen {
                     id: mainScreen
+                }
+                HelpScreen {
+                    id: helpScreen
+                }
+                PlayScreen {
+                    id: playScreen
                 }
             }
         }

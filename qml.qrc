@@ -8,5 +8,7 @@
         <file>assets/play_gold.png</file>
         <file>MainScreen.qml</file>
         <file>assets/arrow_gold.png</file>
+        <file>HelpScreen.qml</file>
+        <file>PlayScreen.qml</file>
     </qresource>
 </RCC>

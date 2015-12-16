@@ -1,7 +1,9 @@
 #include "storage.hpp"
 #include <iostream>
 
-storage::storage() {}
+storage::storage() {
+    qsrand(time(0));
+}
 
 bool storage::compare(int anyInput, int numA, int numB)
 {
@@ -27,11 +29,6 @@ int storage::numY() const
 
 void storage::setNumX(int numX)
 {
-    /*if (m_numX == numX)
-        return;
-
-    m_numX = numX;*/
-    qsrand(time(0));
     numX = qrand() % (count+10) + count;
     m_numX = numX;
     emit numXChanged(numX);
@@ -39,9 +36,6 @@ void storage::setNumX(int numX)
 
 void storage::setNumY(int numY)
 {
-    /*if (m_numY == numY)
-        return;*/
-    qsrand(time(0));
     numY = qrand() % (count+10) + count;
     m_numY = numY;
     emit numYChanged(numY);

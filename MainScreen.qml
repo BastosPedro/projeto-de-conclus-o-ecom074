@@ -20,15 +20,6 @@ ColumnLayout{
     Grid{
         spacing: 8
         columns: 2
-        PropStorage{
-            id: storage
-            numX: setNumX(0)
-        }
-        TextField{
-            id: test
-            visible: false
-            placeholderText: qsTr("%1").arg(storage.numX)
-        }
         Rectangle{
             id: playButton
             implicitHeight: title.width/2
@@ -52,6 +43,7 @@ ColumnLayout{
                 anchors.fill: parent
                 hoverEnabled: parent
                 onClicked: {
+                    playScreen.visible = true
                     mainScreen.visible = false
                     backButton.visible = true
                 }
@@ -59,8 +51,8 @@ ColumnLayout{
         }
         Rectangle{
             id: leaderButton
-            implicitHeight: mm(30)
-            implicitWidth: mm(30)
+            implicitHeight: title.width/2
+            implicitWidth: title.width/2
             border.width: mm(2.5)
             border.color: leaderArea.containsMouse ? "#FFC400" : "#FFAB00"
             color: leaderArea.containsMouse ? "#FFD740" : "#FFC400"
@@ -79,12 +71,16 @@ ColumnLayout{
                 enabled: true
                 anchors.fill: parent
                 hoverEnabled: parent
+                onClicked: {
+                    mainScreen.visible = false
+                    backButton.visible = true
+                }
             }
         }
         Rectangle{
             id: helpButton
-            implicitHeight: mm(30)
-            implicitWidth: mm(30)
+            implicitHeight: title.width/2
+            implicitWidth: title.width/2
             border.width: mm(2.5)
             border.color: helpArea.containsMouse ? "#FFC400" : "#FFAB00"
             color: helpArea.containsMouse ? "#FFD740" : "#FFC400"
@@ -103,12 +99,17 @@ ColumnLayout{
                 enabled: true
                 anchors.fill: parent
                 hoverEnabled: parent
+                onClicked: {
+                    mainScreen.visible = false
+                    backButton.visible = true
+                    helpScreen.visible = true
+                }
             }
         }
         Rectangle{
             id: exitButton
-            implicitHeight: mm(30)
-            implicitWidth: mm(30)
+            implicitHeight: title.width/2
+            implicitWidth: title.width/2
             border.width: mm(2.5)
             border.color: exitArea.containsMouse ? "#FFC400" : "#FFAB00"
             color: exitArea.containsMouse ? "#FFD740" : "#FFC400"
