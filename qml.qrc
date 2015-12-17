@@ -10,5 +10,6 @@
         <file>assets/arrow_gold.png</file>
         <file>HelpScreen.qml</file>
         <file>PlayScreen.qml</file>
+        <file>BackScreen.qml</file>
     </qresource>
 </RCC>

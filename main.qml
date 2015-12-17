@@ -16,6 +16,29 @@ Window {
     height: mm(150)
     width: mm(150)
     color: "#0D47A1"
+//Timer, number generator
+    Timer{
+       id:time
+       interval: 1000
+       repeat: true
+       running: storage.timeOutFlag? false : true
+       onTriggered: timeAux.timeChanged()
+    }
+    Item{
+        id:timeAux
+        property int timeLeft: storage.timeOutFlag? 0 : 31
+        function restart() {
+            timeAux.timeLeft = 31
+        }
+        function timeChanged(){
+            timeLeft--
+            if(!timeAux.timeLeft){
+                //storage.errorFlag = true
+                storage.timeOutFlag = true
+                //timeAux.restart()
+            }
+        }
+    }
     PropStorage{
         id: storage
         numX: setNumX(parseInt(0))
@@ -23,100 +46,9 @@ Window {
         property bool errorFlag:false
         property bool timeOutFlag: true
     }
-    RowLayout{
-        anchors.fill: parent
-        anchors.margins: 10
-        spacing: 10
-        Rectangle{
-            id: border
-            anchors.fill:parent
-            anchors.margins: parent
-            radius: 4
-            color:"#1565C0"
-            Rectangle{
-                id:mainMenu
-                anchors.fill:parent
-                anchors.margins: 10
-                radius: 4
-                color:"#1976D2"
-                Text{
-                    id:author
-                    text: "by Pedro Bastos"
-                    font.pixelSize: parent.height * 0.015
-                    opacity: 0.6
-                    color: "#FFAB00"
-                    anchors.top: parent.top
-                }
-                Text{
-                    id: version
-                    text: "version 1.0"
-                    font.pixelSize: parent.height * 0.015
-                    opacity: 0.6
-                    color: "#FFAB00"
-                    anchors.top: author.bottom
-                }
-                Image{
-                    id:logo
-                    source:"qrc:/assets/giraffe_gold.png"
-                    sourceSize.width: allFather.width * 0.12
-                    sourceSize.height: allFather.height * 0.12
-                    fillMode: Image.PreserveAspectFit
-                    anchors.bottom: parent.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                Rectangle{
-                    id:backButton
-                    visible: false
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    border.width: mm(1.5)
-                    width: parent.width * 0.1
-                    height: parent.height * 0.1
-                    border.color: backArea.containsMouse ? "#FFC400" : "#FFAB00"
-                    color: backArea.containsMouse ? "#FFD740" : "#FFC400"
-                    radius: width
-                    Image{
-                        id:backIcon
-                        source: "qrc:/assets/arrow_gold.png"
-                        sourceSize.width: allFather.width * 0.075
-                        sourceSize.height: allFather.height * 0.075
-                        fillMode: Image.PreserveAspectFit
-                        anchors.bottom: parent.bottom
-                        anchors.centerIn: parent
-                    }
-                    MouseArea{
-                        id:backArea
-                        anchors.fill: parent
-                        enabled: true
-                        hoverEnabled: true
-                        onClicked: {
-                            mainScreen.visible = true
-                            helpScreen.visible = false
-                            backButton.visible = false
-                            playScreen.visible = false
-                            parent.reset()
-                        }
-                    }
-                    function reset(){
-                        storage.score = 0
-                        storage.setNumX(parseInt(0))
-                        storage.setNumY(parseInt(0))
-                        storage.errorFlag = false
-                        storage.timeOutFlag = true
-                    }
-                }
-
-                MainScreen {
-                    id: mainScreen
-                }
-                HelpScreen {
-                    id: helpScreen
-                }
-                PlayScreen {
-                    id: playScreen
-                }
-            }
-        }
+//Menus
+    BackScreen {
+        id: backScreen
     }
 }
 

@@ -28,6 +28,7 @@ Grid{
             }
             else{
                 awnser.text = "";
+                time.stop()
                 storage.errorFlag = true;
             }
         }
@@ -35,7 +36,7 @@ Grid{
         placeholderText: "resposta"
         height:question.height
         width:question.width
-        readOnly: storage.errorFlag ? true : false
+        readOnly: storage.errorFlag | storage.timeOutFlag? true : false
         Keys.onReturnPressed: {
             storage.input = parseInt(awnser.text)
             compare()
@@ -48,29 +49,6 @@ Grid{
         font.pixelSize: 25
         font.bold: true
         text: storage.errorFlag? "Errou!" : qsTr("%1 acerto(s)").arg(storage.score)
-    }
-//Timestuff
-    Timer{
-       id:time
-       interval: 1000
-       repeat: true
-       running: storage.timeOutFlag? false : true
-       onTriggered: timeAux.timeChanged()
-    }
-    Item{
-        id:timeAux
-        property int timeLeft: storage.timeOutFlag? 0 : 31
-        function restart() {
-            timeAux.timeLeft = 31
-        }
-        function timeChanged(){
-            timeLeft--
-            if(!timeAux.timeLeft){
-                storage.errorFlag = true
-                storage.timeOutFlag = true
-                //timeAux.restart()
-            }
-        }
     }
     Text{
         id:timeOnScreen
