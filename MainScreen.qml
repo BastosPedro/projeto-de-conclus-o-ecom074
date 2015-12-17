@@ -43,9 +43,10 @@ ColumnLayout{
                 anchors.fill: parent
                 hoverEnabled: parent
                 onClicked: {
-                    playScreen.visible = true
                     mainScreen.visible = false
+                    playScreen.visible = true
                     backButton.visible = true
+                    storage.timeOutFlag = false
                 }
             }
         }

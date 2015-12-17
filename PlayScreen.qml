@@ -11,11 +11,6 @@ Grid{
     anchors.centerIn: parent
     spacing: 10
     columns: 1
-    /*PropStorage{
-        id: storage
-        numX: setNumX(parseInt(0))
-        numY: setNumY(parseInt(0))
-    }*/
     Text{
         id:question
         color: "#FFAB00"
@@ -33,14 +28,14 @@ Grid{
             }
             else{
                 awnser.text = "";
-                storage.resetFlag = true;
+                storage.errorFlag = true;
             }
         }
         id: awnser
         placeholderText: "resposta"
         height:question.height
         width:question.width
-        readOnly: storage.resetFlag ? true : false
+        readOnly: storage.errorFlag ? true : false
         Keys.onReturnPressed: {
             storage.input = parseInt(awnser.text)
             compare()
@@ -52,6 +47,37 @@ Grid{
         color: "#FFAB00"
         font.pixelSize: 25
         font.bold: true
-        text: storage.resetFlag? "Errou!" : qsTr("%1 acerto(s)").arg(storage.score)
+        text: storage.errorFlag? "Errou!" : qsTr("%1 acerto(s)").arg(storage.score)
+    }
+//Timestuff
+    Timer{
+       id:time
+       interval: 1000
+       repeat: true
+       running: storage.timeOutFlag? false : true
+       onTriggered: timeAux.timeChanged()
+    }
+    Item{
+        id:timeAux
+        property int timeLeft: storage.timeOutFlag? 0 : 31
+        function restart() {
+            timeAux.timeLeft = 31
+        }
+        function timeChanged(){
+            timeLeft--
+            if(!timeAux.timeLeft){
+                storage.errorFlag = true
+                storage.timeOutFlag = true
+                //timeAux.restart()
+            }
+        }
+    }
+    Text{
+        id:timeOnScreen
+        visible:true
+        color: "#FFAB00"
+        font.pixelSize: 25
+        font.bold: true
+        text: storage.timeOutFlag? ("Acabou o tempo!")  : qsTr("%1 segundo(s)").arg(timeAux.timeLeft)
     }
 }

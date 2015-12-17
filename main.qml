@@ -20,7 +20,8 @@ Window {
         id: storage
         numX: setNumX(parseInt(0))
         numY: setNumY(parseInt(0))
-        property bool resetFlag:false
+        property bool errorFlag:false
+        property bool timeOutFlag: true
     }
     RowLayout{
         anchors.fill: parent
@@ -64,12 +65,6 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Rectangle{
-                    function reset(){
-                        storage.score = 0
-                        storage.setNumX(parseInt(0))
-                        storage.setNumY(parseInt(0))
-                        storage.resetFlag = false
-                    }
                     id:backButton
                     visible: false
                     anchors.right: parent.right
@@ -89,7 +84,6 @@ Window {
                         anchors.bottom: parent.bottom
                         anchors.centerIn: parent
                     }
-
                     MouseArea{
                         id:backArea
                         anchors.fill: parent
@@ -102,6 +96,13 @@ Window {
                             playScreen.visible = false
                             parent.reset()
                         }
+                    }
+                    function reset(){
+                        storage.score = 0
+                        storage.setNumX(parseInt(0))
+                        storage.setNumY(parseInt(0))
+                        storage.errorFlag = false
+                        storage.timeOutFlag = true
                     }
                 }
 
