@@ -16,6 +16,12 @@ Window {
     height: mm(150)
     width: mm(150)
     color: "#0D47A1"
+    PropStorage{
+        id: storage
+        numX: setNumX(parseInt(0))
+        numY: setNumY(parseInt(0))
+        property bool resetFlag:false
+    }
     RowLayout{
         anchors.fill: parent
         anchors.margins: 10
@@ -58,6 +64,12 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Rectangle{
+                    function reset(){
+                        storage.score = 0
+                        storage.setNumX(parseInt(0))
+                        storage.setNumY(parseInt(0))
+                        storage.resetFlag = false
+                    }
                     id:backButton
                     visible: false
                     anchors.right: parent.right
@@ -86,8 +98,9 @@ Window {
                         onClicked: {
                             mainScreen.visible = true
                             helpScreen.visible = false
-                            playScreen.visible = false
                             backButton.visible = false
+                            playScreen.visible = false
+                            parent.reset()
                         }
                     }
                 }

@@ -11,11 +11,11 @@ Grid{
     anchors.centerIn: parent
     spacing: 10
     columns: 1
-    PropStorage{
+    /*PropStorage{
         id: storage
         numX: setNumX(parseInt(0))
         numY: setNumY(parseInt(0))
-    }
+    }*/
     Text{
         id:question
         color: "#FFAB00"
@@ -24,7 +24,7 @@ Grid{
         font.pixelSize: 50
     }
     TextField{
-        function send(){
+        function compare(){
             if(storage.numX + storage.numY == storage.input){
                 storage.score++;
                 storage.setNumX(parseInt(0));
@@ -32,18 +32,18 @@ Grid{
                 awnser.text = "";
             }
             else{
-                scoreOnScreen.text = "Errou!";
-                awnser.readOnly = true;
-                backButton.visible = true;
+                awnser.text = "";
+                storage.resetFlag = true;
             }
         }
         id: awnser
         placeholderText: "resposta"
         height:question.height
         width:question.width
+        readOnly: storage.resetFlag ? true : false
         Keys.onReturnPressed: {
             storage.input = parseInt(awnser.text)
-            send()
+            compare()
         }
     }
     Text{
@@ -52,6 +52,6 @@ Grid{
         color: "#FFAB00"
         font.pixelSize: 25
         font.bold: true
-        text: qsTr("%1 acerto(s)").arg(storage.score)
+        text: storage.resetFlag? "Errou!" : qsTr("%1 acerto(s)").arg(storage.score)
     }
 }

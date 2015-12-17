@@ -11,7 +11,6 @@ class storage : public QQuickItem
     Q_PROPERTY(int numY READ numY WRITE setNumY NOTIFY numYChanged)
     Q_PROPERTY(int input READ input WRITE setInput NOTIFY inputChanged)
     Q_PROPERTY(int score READ score WRITE setScore NOTIFY scoreChanged)
-
 public:
     storage();
     int numX() const;
