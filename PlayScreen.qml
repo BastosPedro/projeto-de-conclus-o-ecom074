@@ -30,16 +30,30 @@ Grid{
                 awnser.text = "";
                 time.stop()
                 storage.errorFlag = true;
+                if(storage.score > storage.highScore){
+                    //storage.setHighScore(storage.score)
+                    storage.newRecordFlag = true
+                }
             }
         }
         id: awnser
-        placeholderText: "resposta"
+        visible: storage.newRecordFlag? false: true
+        placeholderText : "resposta"
         height:question.height
         width:question.width
+        property bool auxFlag: false
         readOnly: storage.errorFlag | storage.timeOutFlag? true : false
-        Keys.onReturnPressed: {
-            storage.input = parseInt(awnser.text)
-            compare()
+        Keys.onReturnPressed: storage.setInput(parseInt(awnser.text)) & awnser.compare()
+    }
+    TextField{
+        id:recordAwnser
+        visible: storage.newRecordFlag? true: false
+        placeholderText: "seu nome"
+        height: question.height
+        width: question.widht
+        Keys.onReturnPressed:{
+            storage.setHighName(awnser.text)
+            storage.setHighScore(storage.score)
         }
     }
     Text{

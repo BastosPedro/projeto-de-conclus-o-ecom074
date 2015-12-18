@@ -11,5 +11,6 @@
         <file>HelpScreen.qml</file>
         <file>PlayScreen.qml</file>
         <file>BackScreen.qml</file>
+        <file>LeaderScreen.qml</file>
     </qresource>
 </RCC>

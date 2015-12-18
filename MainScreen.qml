@@ -74,6 +74,7 @@ ColumnLayout{
                 hoverEnabled: parent
                 onClicked: {
                     mainScreen.visible = false
+                    leaderScreen.visible = true
                     backButton.visible = true
                 }
             }

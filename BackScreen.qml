@@ -77,6 +77,7 @@ RowLayout{
                         helpScreen.visible = false
                         backButton.visible = false
                         playScreen.visible = false
+                        leaderScreen.visible = false
                         parent.reset()
                     }
                 }
@@ -86,6 +87,7 @@ RowLayout{
                     storage.setNumY(parseInt(0))
                     storage.errorFlag = false
                     storage.timeOutFlag = true
+                    storage.newRecordFlag = false
                     timeAux.restart()
                 }
             }
@@ -98,6 +100,9 @@ RowLayout{
             }
             PlayScreen {
                 id: playScreen
+            }
+            LeaderScreen {
+                id: leaderScreen
             }
         }
     }

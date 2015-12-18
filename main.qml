@@ -33,9 +33,9 @@ Window {
         function timeChanged(){
             timeLeft--
             if(!timeAux.timeLeft){
-                //storage.errorFlag = true
                 storage.timeOutFlag = true
-                //timeAux.restart()
+                if(storage.score > storage.highScore)
+                    storage.newRecordFlag = true
             }
         }
     }
@@ -44,11 +44,12 @@ Window {
         numX: setNumX(parseInt(0))
         numY: setNumY(parseInt(0))
         property bool errorFlag:false
+        property bool newRecordFlag: false
         property bool timeOutFlag: true
     }
-//Menus
     BackScreen {
         id: backScreen
+        //backscreen holds everything, the background, the menus
     }
 }
 

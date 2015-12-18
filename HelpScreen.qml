@@ -40,7 +40,7 @@ ColumnLayout{
         color:"#FFAB00"
     }
     Text{
-        text:qsTr(" - Se acertar, você ganha outro ponto, e recebe outros dois números para somar")
+        text:qsTr(" - Se acertar, você ganha um ponto, e recebe outros dois números para somar")
         font.pixelSize: 12
         font.bold: true
         color:"#FFAB00"
@@ -52,13 +52,13 @@ ColumnLayout{
         color:"#FFAB00"
     }
     Text{
-        text:qsTr(" - O jogo para quando você erra, ou quando seu tempo de X segundos acaba")
+        text:qsTr(" - O jogo para quando você erra, ou quando seu tempo de 30 segundos acaba")
         font.pixelSize: 12
         font.bold: true
         color:"#FFAB00"
     }
     Text{
-        text:qsTr(" - Se você quer ver as melhores pontuações, clique no botão do pódio no menu")
+        text:qsTr(" - Se você quer ver a melhor potuação, clique no botão com o troféu, no menu")
         font.pixelSize: 12
         font.bold: true
         color:"#FFAB00"
@@ -70,7 +70,7 @@ ColumnLayout{
         color:"#FFAB00"
     }
     Text{
-        text:qsTr(" - Só isso! Bem simples, não?")
+        text:qsTr(" - Bem simples, não?")
         font.pixelSize: 12
         font.bold: true
         color:"#FFAB00"

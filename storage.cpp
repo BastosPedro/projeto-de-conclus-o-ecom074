@@ -3,12 +3,26 @@
 
 storage::storage() {
     qsrand(time(0));
+    //QObject::connect(this, &storage::inputChanged, this, &storage::compare);
+}
+int storage::numX() const
+{
+    return m_numX;
 }
 
-bool storage::compare(int anyInput, int numA, int numB)
+int storage::numY() const
 {
-    if(anyInput == (numA + numB)) return true;
-    else return false;
+    return m_numY;
+}
+
+QString storage::highName() const
+{
+    return m_highName;
+}
+
+int storage::highScore() const
+{
+    return m_highScore;
 }
 
 int storage::score() const
@@ -22,14 +36,13 @@ int storage::input() const
 }
 
 //signals and slots
-int storage::numX() const
+void storage::compare(int anyInput, int numA, int numB)
 {
-    return m_numX;
-}
-
-int storage::numY() const
-{
-    return m_numY;
+    if(anyInput == (numA + numB)){
+        m_score++;
+        setNumX(0);
+        setNumY(0);
+    }
 }
 
 void storage::setNumX(int numX)
@@ -62,5 +75,23 @@ void storage::setScore(int score)
 
     m_score = score;
     emit scoreChanged(score);
+}
+
+void storage::setHighScore(int highScore)
+{
+    if (m_highScore == highScore)
+        return;
+
+    m_highScore = highScore;
+    emit highScoreChanged(highScore);
+}
+
+void storage::setHighName(QString highName)
+{
+    if (m_highName == highName)
+        return;
+
+    m_highName = highName;
+    emit highNameChanged(highName);
 }
 
