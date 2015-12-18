@@ -20,6 +20,7 @@ Grid{
     }
     TextField{
         function compare(){
+            recordAwnser.saved = false
             if(storage.numX + storage.numY == storage.input){
                 storage.score++;
                 storage.setNumX(parseInt(0));
@@ -47,13 +48,15 @@ Grid{
     }
     TextField{
         id:recordAwnser
+        property bool saved: false
         visible: storage.newRecordFlag? true: false
-        placeholderText: "seu nome"
+        placeholderText: saved? "salvo! pode voltar pro menu" : "seu nome + ENTER"
         height: question.height
         width: question.width
         Keys.onReturnPressed:{
             storage.setHighName(qsTr(recordAwnser.text))
             storage.setHighScore(storage.score)
+            saved = true
             recordAwnser.text = ""
         }
     }

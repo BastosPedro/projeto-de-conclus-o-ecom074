@@ -15,3 +15,6 @@ int main(int argc, char *argv[])
 
 
 }
+/*int main(){
+   storage *anyStorage = new storage();
+}*/

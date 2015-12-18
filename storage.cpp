@@ -2,9 +2,43 @@
 #include <iostream>
 
 storage::storage() {
+    QFile saves("./saves.json");
+    if(!saves.open(QIODevice::ReadOnly)){
+        qWarning("couldn't open");
+        m_highScore = 0;
+        m_highName = "";
+    }
+    else qWarning("file read!");
+    QByteArray data = saves.readAll();
+    QJsonDocument load(QJsonDocument::fromJson(data));
+    reader(load.object());
     qsrand(time(0));
-    //QObject::connect(this, &storage::inputChanged, this, &storage::compare);
 }
+void storage::reader(const QJsonObject &json)
+{
+   m_highScore = json["score"].toInt();
+   qDebug() << "score" << highScore();
+   m_highName = json["name"].toString();
+   qDebug() << "name" << highName();
+}
+
+void storage::writer(QJsonObject &json) const
+{
+    json["score"] = highScore();
+    json["name"] = highName();
+}
+
+void storage::saver()
+{
+    QFile saves("./saves.json");
+    if(!saves.open(QIODevice::WriteOnly)) qWarning("something wrong happened");
+    QJsonObject scoreObject;
+    writer(scoreObject);
+    QJsonDocument saveData(scoreObject);
+    saves.write(saveData.toJson());
+}
+//Getters
+
 int storage::numX() const
 {
     return m_numX;
@@ -35,15 +69,7 @@ int storage::input() const
     return m_input;
 }
 
-//signals and slots
-void storage::compare(int anyInput, int numA, int numB)
-{
-    if(anyInput == (numA + numB)){
-        m_score++;
-        setNumX(0);
-        setNumY(0);
-    }
-}
+//setters and signals
 
 void storage::setNumX(int numX)
 {
@@ -84,6 +110,7 @@ void storage::setHighScore(int highScore)
 
     m_highScore = highScore;
     emit highScoreChanged(highScore);
+    emit this->saver();
 }
 
 void storage::setHighName(QString highName)

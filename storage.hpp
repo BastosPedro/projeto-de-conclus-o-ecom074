@@ -2,6 +2,8 @@
 #define STORAGE_HPP
 
 #include <QQuickItem>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <random>
 
 class storage : public QQuickItem
@@ -22,6 +24,9 @@ public:
     int highScore() const;
     QString highName() const;
 
+    void reader(const QJsonObject &json);
+    void writer(QJsonObject &json) const;
+
 signals:
     void numXChanged(int numX);
     void numYChanged(int numY);
@@ -31,7 +36,8 @@ signals:
     void highNameChanged(QString highName);
 
 public slots:
-    void compare(int anyInput, int numA, int numB);
+    //void compare(int anyInput, int numA, int numB);//legacy
+    void saver();
     void setNumX(int numX);
     void setNumY(int numY);
     void setInput(int input);
@@ -41,8 +47,8 @@ public slots:
 
 private:
     int m_numX, m_numY, m_input, m_score = 0;
-    int m_highScore;
-    QString m_highName;
+    int m_highScore; QString m_highName;
+    QFile saves;
 };
 
 #endif // STORAGE_HPP
