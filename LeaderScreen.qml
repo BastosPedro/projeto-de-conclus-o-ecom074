@@ -11,24 +11,17 @@ ColumnLayout{
     anchors.centerIn: parent
     Text{
         id: title
-        text: qsTr("Melhor pontuação")
+        text: storage.highScore? qsTr("Melhor pontuação pertence a...") : qsTr("Sem recordes ainda!")
         color: "#FFAB00"
-        font.pixelSize: 35
+        font.pixelSize: 22
         font.bold: true
     }
     Text{
         id: name
-        text: storage.highScore? qsTr("Nome:").arg(storage.highName) : qsTr("Sem recorde ainda!")
+        visible: storage.highScore? true : false
+        text: (storage.highName + qsTr(", com %1 acerto(s)!").arg(storage.highScore))
         color: "#FFAB00"
-        font.pixelSize: 25
-        font.bold: true
-    }
-    Text{
-        id: score
-        visible: storage.highScore? true: false
-        text: qsTr("Acertos: %1").arg(storage.highScore)
-        color: "#FFAB00"
-        font.pixelSize: 25
+        font.pixelSize: 22
         font.bold: true
     }
 }

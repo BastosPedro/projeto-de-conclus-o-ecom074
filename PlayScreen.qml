@@ -14,9 +14,9 @@ Grid{
     Text{
         id:question
         color: "#FFAB00"
-        text: qsTr("%1 + %2?").arg(storage.numX).arg(storage.numY)
+        text:storage.newRecordFlag? qsTr("Novo Recorde!") : qsTr("%1 + %2?").arg(storage.numX).arg(storage.numY)
         font.bold: true
-        font.pixelSize: 50
+        font.pixelSize:storage.newRecordFlag? 35 : 50
     }
     TextField{
         function compare(){
@@ -50,10 +50,11 @@ Grid{
         visible: storage.newRecordFlag? true: false
         placeholderText: "seu nome"
         height: question.height
-        width: question.widht
+        width: question.width
         Keys.onReturnPressed:{
-            storage.setHighName(awnser.text)
+            storage.setHighName(qsTr(recordAwnser.text))
             storage.setHighScore(storage.score)
+            recordAwnser.text = ""
         }
     }
     Text{
